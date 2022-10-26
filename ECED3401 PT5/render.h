@@ -1,3 +1,11 @@
+/*
+* render.h
+* 
+* Purpose: Render the map data on the screen
+* Author: Alex Amellal
+* 
+*/
+
 #pragma once
 
 // Project headers
