@@ -9,8 +9,8 @@
 #include <Windows.h>
 
 void loop() {
-	update_taxis();
-	update_map();
+	//update_taxis();
+	//update_map();
 
 	Sleep(1000);
 }
@@ -35,7 +35,10 @@ int main(int argc, char *argv[]) {
 
 	render_map(m);
 
-	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 5, .cy = 5 }, '0');
+	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 5, .cy = 3 }, 'X');
+	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 5, .cy = 4 }, 'X');
+	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 4, .cy = 3 }, 'X');
+	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 4, .cy = 4 }, 'X');
 
 	for (;;) {
 		loop();
