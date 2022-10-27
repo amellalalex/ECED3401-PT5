@@ -8,6 +8,8 @@
 4b. Delay loop according to desired clock delay
 5. 
 
+dodododododododododododododododododododododoododododododododododododododoododododo
+
 
 1 tick = 0.5s
 

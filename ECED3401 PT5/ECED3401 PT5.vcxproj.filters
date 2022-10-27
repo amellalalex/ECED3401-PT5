@@ -29,5 +29,13 @@
     <ClInclude Include="structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="taxi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\TODO.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

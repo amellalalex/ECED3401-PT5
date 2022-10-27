@@ -15,9 +15,9 @@
 static void render_row(Map m, int flag) {
 	switch (flag) {
 	case ROW_INTER_BLOCK:
-		for (int x = 0; x <= m.width * HCHARS_PER_BLOCK; x++) {
+		for (int x = 0; x <= m.width * m.hchars_per_block; x++) {
 			// Print intersecting char 
-			if (x % HCHARS_PER_BLOCK == 0) {
+			if (x % m.hchars_per_block == 0) {
 				printf("%c", CINTERS);
 			}
 			else {
@@ -26,9 +26,9 @@ static void render_row(Map m, int flag) {
 		}
 		break;
 	case ROW_INNER_BLOCK:
-		for (int x = 0; x <= m.width * HCHARS_PER_BLOCK; x++) {
+		for (int x = 0; x <= m.width * m.hchars_per_block; x++) {
 			// Print intersecting char 
-			if (x % HCHARS_PER_BLOCK == 0) {
+			if (x % m.hchars_per_block == 0) {
 				printf("%c", CVEDGE);
 			}
 			else {
@@ -51,7 +51,7 @@ void render_blockr(Map m, int flag) {
 	printf("\n");
 
 	// Print intermittent chars
-	for (int y = 1; y < VCHARS_PER_BLOCK - 1; y++) {
+	for (int y = 1; y < m.vchars_per_block - 1; y++) {
 		render_row(m, ROW_INNER_BLOCK);
 		printf("\n");
 	}
@@ -78,4 +78,18 @@ void render_map(Map m) {
 	// Render last block row
 	render_blockr(m, BLOCKR_LAST);
 	printf("\n");
+}
+
+// Replaces a character in the map with another character
+void render_replace(Map m, Pos pos, char c) {
+	// Calculate absolute position in chars
+	int x = pos.x * m.hchars_per_block + pos.cx;
+	int y = pos.y * m.vchars_per_block + pos.cy;
+	
+	// Update terminal cursor location
+	COORD coord = { .X = x, .Y = y };
+	SetConsoleCursorPosition(m.console, coord);
+
+	// Print backspace and desired newchar
+	printf("\b%c", c);
 }
