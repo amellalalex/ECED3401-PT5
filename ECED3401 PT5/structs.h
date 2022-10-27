@@ -17,7 +17,7 @@
 enum taxi_state{
 	TAXI_STATE_IDLE,
 	TAXI_STATE_DRIVING,
-};
+} taxi_state;
 
 typedef struct pos {
 	int x;
