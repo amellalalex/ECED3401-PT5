@@ -1,0 +1,14 @@
+--- TODO ---
+
+1. Make a function that can replace characters in a pre-made map
+2. Make a function that uses the replace character function to render taxis
+3. Make a function(s) to scan over the taxis and update their statuses
+3b. Make functions to navigate the taxis around
+4. Make the map rendering loop
+4b. Delay loop according to desired clock delay
+5. 
+
+
+1 tick = 0.5s
+
+Taxi to travel from 1 block to the next: 5 ticks
