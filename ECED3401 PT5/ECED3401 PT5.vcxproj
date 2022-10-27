@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="render.c" />
+    <ClCompile Include="taxi.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h" />
