@@ -130,6 +130,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="render.c" />
     <ClCompile Include="taxi.c" />
+    <ClCompile Include="TAXI_ATTEMPT5.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h" />

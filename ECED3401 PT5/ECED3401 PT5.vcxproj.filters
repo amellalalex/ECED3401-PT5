@@ -24,6 +24,9 @@
     <ClCompile Include="taxi.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TAXI_ATTEMPT5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
