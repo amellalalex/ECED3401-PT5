@@ -8,13 +8,6 @@
 // Substandard C libraries
 #include <Windows.h>
 
-void loop() {
-	//update_taxis();
-	//update_map();
-
-	Sleep(1000);
-}
-
 int main(int argc, char *argv[]) {
 	// Check argc 
 	if(argc != 3) {
@@ -33,15 +26,22 @@ int main(int argc, char *argv[]) {
 		.console = GetStdHandle(STD_OUTPUT_HANDLE),
 	};
 
-	render_map(m);
-
-	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 5, .cy = 3 }, 'X');
-	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 5, .cy = 4 }, 'X');
-	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 4, .cy = 3 }, 'X');
-	render_replace(m, (Pos) { .x = 0, .y = 0, .cx = 4, .cy = 4 }, 'X');
+	Taxi t = (Taxi){
+		.taxi_pos = {.x = 1, .y = 2, .cx = 3, .cy = 0},
+	};
 
 	for (;;) {
-		loop();
+		//update_taxis();
+		//update_map();
+
+		// Render 
+		render_map(m);
+		render_taxi(m, t);
+
+		// Update
+		t.taxi_pos = offset_cpos(t.taxi_pos, 1, 0);
+
+		Sleep(500);
 	}
 
 	getchar();

@@ -129,13 +129,14 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="render.c" />
-    <ClCompile Include="taxi.c" />
     <ClCompile Include="TAXI_ATTEMPT5.c" />
+    <ClCompile Include="util.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="taxi.h" />
+    <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\TODO.txt" />

@@ -70,6 +70,9 @@ void render_map(Map m) {
 		return;
 	}
 
+	// Reset cursor position
+	move_cursor(m, (Pos) { .x = 0, .y = 0, .cx = 0, .cy = 0 });
+
 	// Render block rows UP TO n-1
 	for (int x = 0; x < m.height-1; x++) {
 		render_blockr(m, BLOCKR_NORMAL);
@@ -82,14 +85,19 @@ void render_map(Map m) {
 
 // Replaces a character in the map with another character
 void render_replace(Map m, Pos pos, char c) {
-	// Calculate absolute position in chars
-	int x = pos.x * m.hchars_per_block + pos.cx;
-	int y = pos.y * m.vchars_per_block + pos.cy;
-	
 	// Update terminal cursor location
-	COORD coord = { .X = x, .Y = y };
-	SetConsoleCursorPosition(m.console, coord);
+	move_cursor(m, pos);
 
 	// Print backspace and desired newchar
 	printf("\b%c", c);
+}
+
+// Renders a taxi on the map
+//
+// NOTE: Anchors the back of the taxi on the coordinate
+void render_taxi(Map m, Taxi t) {
+	render_replace(m, offset_cpos(t.taxi_pos, -1, 0), CTAXI_W);
+	render_replace(m, offset_cpos(t.taxi_pos, 0, 0), CTAXI_B);
+	render_replace(m, offset_cpos(t.taxi_pos, 1, 0), CTAXI_FR);
+	render_replace(m, offset_cpos(t.taxi_pos, 2, 0), CTAXI_W);
 }

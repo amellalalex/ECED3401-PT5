@@ -10,6 +10,7 @@
 
 // Project headers
 #include "structs.h"
+#include "util.h"
 
 // Standard C libraries
 #include <stdio.h>
@@ -17,11 +18,17 @@
 // Substandard C libraries
 #include <Windows.h>
 
-// Render settings
+// Map render chars
 #define CINTERS '+'
 #define CVEDGE '|'
 #define CHEDGE '-'
 #define CSPACE ' '
+
+// Taxi render chars
+#define CTAXI_FL '<'	// Taxi front (left)
+#define CTAXI_FR '>'	// Taxi front (right)
+#define CTAXI_B '='		// Taxi back
+#define CTAXI_W 'o'		// Taxi wheel
 
 // Render flags
 enum {
@@ -40,6 +47,7 @@ void render_map(Map m);
 // Replaces a character in the map with another character
 void render_replace(Map m, Pos pos, char c);
 
+// Renders a taxi on the map
 void render_taxi(Map m, Taxi t);
 
 void map_render_loop(Map m);
