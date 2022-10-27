@@ -18,6 +18,6 @@ int main(int argc, char *argv[]) {
 	Map m = (Map){ .width = width, .height = height };
 
 	render_map(m);
-
+	getchar();
 	return 0;
 }
