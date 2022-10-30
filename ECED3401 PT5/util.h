@@ -34,6 +34,17 @@ Pos offset_cpos(Pos p, int cxoff, int cyoff);
 // Generates a random position within the provided map
 Pos get_random_pos(Map m);
 
+// Returns the next position of the taxi's path
+Pos next_pos(Map m, Taxi t);
+
+// Determines heading with respect to positions
+int determine_heading(Pos src, Pos dest);
+
+// Returns scalar positions (absolute) from position
+//
+// NOTE: Both the x/y and cx/cy pairs will contain the absolute position pairs.
+Pos get_scalar(Map m, Pos pos);
+
 ///////////////////////////
 //		Windows Util	 //
 ///////////////////////////
