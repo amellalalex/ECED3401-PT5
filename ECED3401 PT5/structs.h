@@ -51,7 +51,7 @@ typedef struct pos {
 
 typedef struct taxi {
 	int state;
-	int ori;
+	int orientation;
 	Pos taxi_pos;
 } Taxi;
 

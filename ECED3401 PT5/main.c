@@ -32,7 +32,6 @@ int main(int argc, char *argv[]) {
 
 	for (;;) {
 		//update_taxis();
-		//update_map();
 
 		// Render 
 		render_map(m);

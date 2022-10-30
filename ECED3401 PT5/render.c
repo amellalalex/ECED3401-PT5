@@ -96,7 +96,7 @@ void render_replace(Map m, Pos pos, char c) {
 //
 // NOTE: Anchors the back of the taxi on the coordinate
 void render_taxi(Map m, Taxi t) {
-	switch (t.ori) {
+	switch (t.orientation) {
 	case NORTH:
 		render_replace(m, offset_cpos(t.taxi_pos, 0, -1), CTAXI_W);
 		//render_replace(m, offset_cpos(t.taxi_pos, 0, -1), VTAXI_FT);
