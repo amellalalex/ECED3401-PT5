@@ -109,6 +109,7 @@ void render_taxi(Map m, Taxi t) {
 		//render_replace(m, offset_cpos(t.taxi_pos, 0, 1), VTAXI_FB);
 		render_replace(m, offset_cpos(t.taxi_pos, 0, 1), CTAXI_W);
 		break;
+	default:
 	case EAST:
 		render_replace(m, offset_cpos(t.taxi_pos, -1, 0), CTAXI_W);
 		render_replace(m, offset_cpos(t.taxi_pos, 0, 0), CTAXI_B);

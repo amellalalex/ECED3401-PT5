@@ -39,9 +39,9 @@ int main(int argc, char *argv[]) {
 
 		// Update
 		t.taxi_pos = offset_cpos(t.taxi_pos, 1, 0);
-		t.ori++;
-		if (t.ori > WEST) {
-			t.ori = NORTH;
+		t.orientation++;
+		if (t.orientation > WEST) {
+			t.orientation = NORTH;
 		}
 
 		Sleep(500);
