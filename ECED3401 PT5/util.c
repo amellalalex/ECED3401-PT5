@@ -100,6 +100,42 @@ Pos get_random_pos(Map m) {
 	return pos;
 }
 
+// Returns the next position of the taxi's path
+Pos next_pos(Map m, Taxi t) {
+	SPos scalar_pos = get_scalar(m, t.taxi_pos);
+	SPos scalar_dest = get_scalar(m, t.destination);
+	SPos scalar_next = scalar_pos;
+
+	// Determine heading
+	int heading = determine_heading(m, t.taxi_pos, t.destination);
+
+	// Check for opportunity to fork
+	int halign = t.taxi_pos.cx == 0;
+	int valign = t.taxi_pos.cy == 0;
+	if (halign && valign) {
+		// Fork
+	}
+	else {
+		// Move along current axis
+		if (halign) {
+			if (heading & EAST) {
+				scalar_next.x++;
+			}
+			else if (heading & WEST) {
+				scalar_next.x--;
+			}
+		}
+		else if (valign) {
+			if (heading & NORTH) {
+				scalar_next.y--;
+			}
+			else if (heading & SOUTH) {
+				scalar_next.y++;
+			}
+		}
+	}
+}
+
 // Returns scalar positions (absolute) from position
 SPos get_scalar(Map m, Pos pos) {
 	int x = pos.x * m.hchars_per_block + pos.cx;
