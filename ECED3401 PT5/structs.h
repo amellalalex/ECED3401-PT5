@@ -53,6 +53,8 @@ typedef struct taxi {
 	int state;
 	int orientation;
 	Pos taxi_pos;
+	Pos origin;
+	Pos destination;
 } Taxi;
 
 typedef struct map {
@@ -62,3 +64,19 @@ typedef struct map {
 	int vchars_per_block;
 	HANDLE console;
 } Map;
+
+/*
+*
+* Here is how requests are handled:
+* 1. All the requests are read from file into memory
+* 2. When the time comes, an event is triggered 
+* 3. Events are sorted based on time
+* 4. A 'next event time' is stored in the event queue to skip ahead
+*/
+
+typedef struct request {
+	int time;
+	int pass_num;
+	Pos origin;
+	Pos destination;
+};
