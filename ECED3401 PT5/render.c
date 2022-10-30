@@ -86,7 +86,7 @@ void render_map(Map m) {
 // Replaces a character in the map with another character
 void render_replace(Map m, Pos pos, char c) {
 	// Update terminal cursor location
-	move_cursor(m, pos);
+	move_cursor(m, offset_cpos(pos, 1, 0));
 
 	// Print backspace and desired newchar
 	printf("\b%c", c);
