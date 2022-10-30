@@ -12,6 +12,9 @@
 // Project libraries
 #include "structs.h"
 
+// Standard C libraries
+#include <stdlib.h>
+
 // Substandard C libraries
 #include <Windows.h>
 
@@ -27,6 +30,9 @@ Pos offset_bpos(Pos p, int xoff, int yoff);
 
 // Offset a position by chars only.
 Pos offset_cpos(Pos p, int cxoff, int cyoff);
+
+// Generates a random position within the provided map
+Pos get_random_pos(Map m);
 
 ///////////////////////////
 //		Windows Util	 //

@@ -31,6 +31,12 @@ int main(int argc, char *argv[]) {
 	};
 
 	for (;;) {
+		Pos randp = get_random_pos(m);
+		printf("get_random_pos(m) = (Pos) { .x = %d, .y = %d, .cx = %d, .cy = %d }\n", randp.x, randp.y, randp.cx, randp.cy);
+		Sleep(500);
+	}
+
+	for (;;) {
 		//update_taxis();
 
 		// Render 
