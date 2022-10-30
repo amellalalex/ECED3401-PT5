@@ -43,7 +43,7 @@ Pos offset_cpos(Pos p, int cxoff, int cyoff) {
 // Moves the terminal cursor to the map position provided.
 void move_cursor(Map m, Pos pos) {
 	// Calculate absolute position in chars
-	int x = pos.x * m.hchars_per_block + pos.cx;
+	int x = pos.x * m.hchars_per_block + pos.cx + 1;
 	int y = pos.y * (m.vchars_per_block - 1) + pos.cy; // -1 because normal blocks lack last row
 
 	// Update terminal cursor location
