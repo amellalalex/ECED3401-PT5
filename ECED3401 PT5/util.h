@@ -43,7 +43,7 @@ int determine_heading(Pos src, Pos dest);
 // Returns scalar positions (absolute) from position
 //
 // NOTE: Both the x/y and cx/cy pairs will contain the absolute position pairs.
-Pos get_scalar(Map m, Pos pos);
+SPos get_scalar(Map m, Pos pos);
 
 ///////////////////////////
 //		Windows Util	 //

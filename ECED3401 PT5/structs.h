@@ -33,6 +33,11 @@ typedef struct pos {
 	int cy;
 } Pos;
 
+typedef struct scalar_pos {
+	int x;
+	int y;
+} SPos;
+
 // x = 1, y = 1, cx = 0, cy = 0
 
 /*

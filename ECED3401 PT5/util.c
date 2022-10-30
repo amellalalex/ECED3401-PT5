@@ -101,17 +101,13 @@ Pos get_random_pos(Map m) {
 }
 
 // Returns scalar positions (absolute) from position
-//
-// NOTE: Both the x/y and cx/cy pairs will contain the absolute position pairs.
-Pos get_scalar(Map m, Pos pos) {
+SPos get_scalar(Map m, Pos pos) {
 	int x = pos.x * m.hchars_per_block + pos.cx;
 	int y = pos.y * m.vchars_per_block + pos.cy;
 
-	return (Pos) {
+	return (SPos) {
 		.x = x,
 		.y = y,
-		.cx = x,
-		.cy = y,
 	};
 }
 
