@@ -96,8 +96,30 @@ void render_replace(Map m, Pos pos, char c) {
 //
 // NOTE: Anchors the back of the taxi on the coordinate
 void render_taxi(Map m, Taxi t) {
-	render_replace(m, offset_cpos(t.taxi_pos, -1, 0), CTAXI_W);
-	render_replace(m, offset_cpos(t.taxi_pos, 0, 0), CTAXI_B);
-	render_replace(m, offset_cpos(t.taxi_pos, 1, 0), CTAXI_FR);
-	render_replace(m, offset_cpos(t.taxi_pos, 2, 0), CTAXI_W);
+	switch (t.ori) {
+	case NORTH:
+		render_replace(m, offset_cpos(t.taxi_pos, 0, -1), CTAXI_W);
+		//render_replace(m, offset_cpos(t.taxi_pos, 0, -1), VTAXI_FT);
+		render_replace(m, offset_cpos(t.taxi_pos, 0, 0), VTAXI_BT);
+		render_replace(m, offset_cpos(t.taxi_pos, 0, 1), CTAXI_W);
+		break;
+	case SOUTH:
+		render_replace(m, offset_cpos(t.taxi_pos, 0, -1), CTAXI_W);
+		render_replace(m, offset_cpos(t.taxi_pos, 0, 0), VTAXI_BB);
+		//render_replace(m, offset_cpos(t.taxi_pos, 0, 1), VTAXI_FB);
+		render_replace(m, offset_cpos(t.taxi_pos, 0, 1), CTAXI_W);
+		break;
+	case EAST:
+		render_replace(m, offset_cpos(t.taxi_pos, -1, 0), CTAXI_W);
+		render_replace(m, offset_cpos(t.taxi_pos, 0, 0), CTAXI_B);
+		render_replace(m, offset_cpos(t.taxi_pos, 1, 0), CTAXI_FR);
+		render_replace(m, offset_cpos(t.taxi_pos, 2, 0), CTAXI_W);
+		break;
+	case WEST:
+		render_replace(m, offset_cpos(t.taxi_pos, -2, 0), CTAXI_W);
+		render_replace(m, offset_cpos(t.taxi_pos, -1, 0), CTAXI_FL);
+		render_replace(m, offset_cpos(t.taxi_pos, 0, 0), CTAXI_B);
+		render_replace(m, offset_cpos(t.taxi_pos, 1, 0), CTAXI_W);
+		break;
+	}
 }

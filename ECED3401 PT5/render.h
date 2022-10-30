@@ -30,6 +30,11 @@
 #define CTAXI_B '='		// Taxi back
 #define CTAXI_W 'o'		// Taxi wheel
 
+#define VTAXI_FT 'A'	// Taxi front (top)
+#define VTAXI_BT 'A'	// Taxi back (vertical up)
+#define VTAXI_BB 'V'	// Taxi back (vertical down)
+#define VTAXI_FB 'V'	// Taxi front (bottom)
+
 // Render flags
 enum {
 	ROW_INTER_BLOCK,

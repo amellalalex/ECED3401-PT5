@@ -19,6 +19,17 @@ enum taxi_state{
 	TAXI_STATE_DRIVING,
 } taxi_state;
 
+enum {
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST,
+	NORTH_EAST,
+	NORTH_WEST,
+	SOUTH_EAST,
+	SOUTH_WEST,
+};
+
 typedef struct pos {
 	int x;
 	int y;
@@ -40,6 +51,7 @@ typedef struct pos {
 
 typedef struct taxi {
 	int state;
+	int ori;
 	Pos taxi_pos;
 } Taxi;
 
