@@ -99,3 +99,47 @@ Pos get_random_pos(Map m) {
 
 	return pos;
 }
+
+// Returns scalar positions (absolute) from position
+//
+// NOTE: Both the x/y and cx/cy pairs will contain the absolute position pairs.
+Pos get_scalar(Map m, Pos pos) {
+	int x = pos.x * m.hchars_per_block + pos.cx;
+	int y = pos.y * m.vchars_per_block + pos.cy;
+
+	return (Pos) {
+		.x = x,
+		.y = y,
+		.cx = x,
+		.cy = y,
+	};
+}
+
+// Determines heading with respect to positions
+//
+// NOTE: Don't forget that y increases going down (y-inverted)
+// NOTE: North is pointing 'up' towards the negative Y direction
+//
+// Returns: Flag combination of N/E/S/W (OR'd) or 0 in case destination is reached
+int determine_heading(Map m, Pos src, Pos dest) {
+	Pos scalar_src = get_scalar(m, src);
+	Pos scalar_dest = get_scalar(m, dest);
+
+	// Determine heading
+	int heading = 0;
+	if (scalar_src.x < scalar_dest.x) {
+		heading |= EAST;
+	}
+	else if (scalar_src.x > scalar_dest.x) {
+		heading |= WEST;
+	}
+
+	if (scalar_src.y < scalar_dest.y) {
+		heading |= SOUTH;
+	}
+	else if (scalar_src.y > scalar_dest.y) {
+		heading |= NORTH;
+	}
+
+	return heading;
+}
