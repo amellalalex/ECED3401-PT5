@@ -1,5 +1,6 @@
 // Project headers
 #include "render.h"
+#include "taxi.h"
 
 // Standard C libraries
 #include <stdio.h>
@@ -38,9 +39,6 @@ int main(int argc, char *argv[]) {
 
 	int driving_taxis = MAX_NUM_TAXIS;
 	while (driving_taxis > 0) {
-
-
-
 		driving_taxis = 0;
 		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
 			if (taxis[x].state == TAXI_STATE_DRIVING) {
