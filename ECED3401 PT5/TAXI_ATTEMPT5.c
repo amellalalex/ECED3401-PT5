@@ -15,9 +15,6 @@ void navigate_taxi(Taxi* T, Map m) {
 	//well since this only makes it go to the right and up
 	//there will  be 4 cases: up right up left down right down left
 	//Up y++ cy++ down y-- cy-- right x++ cx++ and left x-- cx--
-	T->destination = get_random_pos(m);
-	T->origin = get_random_pos(m);
-	T->taxi_pos = T->origin;
 	T->state = TAXI_STATE_DRIVING;
 	if (T->origin.x < T->destination.x) {//if the taxi should go right
 		T->orientation = 2;
