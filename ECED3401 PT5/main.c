@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
 	while (driving_taxis > 0) {
 		// Re-render map
 		render_map(m);
-	
+
 		char* heading_msg;
 		printf("\n\n");
 		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
@@ -56,11 +56,16 @@ int main(int argc, char *argv[]) {
 		}
 
 		// Update taxi pos & render
+#ifdef DEBUG
 		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
 			taxis[x].taxi_pos = next_pos(m, taxis[x]);
 			render_taxi(m, taxis[x]);
 		}
-
+#endif // DEBUG
+		update_taxi(taxis, m);
+		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
+			render_taxi(m, taxis[x]);
+		}
 		// Count driving taxis
 		driving_taxis = 0;
 		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
