@@ -24,26 +24,31 @@ void navigate_taxi(Taxi* T, Map m) {
 	//there will  be 4 cases: up right up left down right down left
 	//Up y++ cy++ down y-- cy-- right x++ cx++ and left x-- cx--
 
+	// Create scalar position
+	SPos scalar = get_scalar(m, T->taxi_pos);
+
 	// Align blocks first
 	if (T->origin.x < T->destination.x) {//if the taxi should go right
 		T->orientation = 2;
-		T->taxi_pos = offset_cpos(T->taxi_pos, 1, 0);
+		//T->taxi_pos = offset_cpos(T->taxi_pos, 1, 0);
+		scalar.x++;
 		
 	}
 	else if (T->taxi_pos.x > T->destination.x ) {//if the taxi should go left
 		T->orientation = 8;
-		T->taxi_pos = offset_cpos(T->taxi_pos, -1, 0);
+		//T->taxi_pos = offset_cpos(T->taxi_pos, -1, 0);
+		scalar.x--;
 		
 	}
 	else if (T->origin.y < T->destination.y && T->taxi_pos.x == T->destination.x) {//if the taxi should go north
 		T->orientation = 1;
-		T->taxi_pos = offset_cpos(T->taxi_pos, 0, 1);
-		
+		//T->taxi_pos = offset_cpos(T->taxi_pos, 0, 1);
+		scalar.y++;
 	}
 	else if (T->origin.y > T->destination.y  && T->taxi_pos.x == T->destination.x) {//if the taxi should go south
 		T->orientation = 4;
-		T->taxi_pos = offset_cpos(T->taxi_pos, 0, -1);
-		
+		//T->taxi_pos = offset_cpos(T->taxi_pos, 0, -1);
+		scalar.y--;
 	}
 	else if (T->taxi_pos.cx == T->destination.cx && T->taxi_pos.x == T->destination.x && T->taxi_pos.cy == T->destination.cy && T->taxi_pos.y == T->destination.y) {
 		T->state = TAXI_STATE_IDLE;
@@ -53,18 +58,22 @@ void navigate_taxi(Taxi* T, Map m) {
 		if (T->destination.cx != 0) {
 			// Move right
 			T->orientation = EAST;
-			T->taxi_pos.cx++;
+			//T->taxi_pos.cx++;
+			scalar.x++;
 		}
 		else if (T->destination.cy != 0) {
 			// Move down
 			T->orientation = SOUTH;
-			T->taxi_pos.cy++;
+			//T->taxi_pos.cy++;
+			scalar.y++;
 		}
 		else {
 			// We're done
 			T->state = TAXI_STATE_IDLE;
 		}
 	}
+
+	T->taxi_pos = get_pos(m, scalar);
 
 	//if (T->taxi_pos.cx > 10) {
 	//	T->taxi_pos.cx = 0;
