@@ -2,7 +2,15 @@
 #include "util.h"
 Taxi Num_of_Taxis[MAX_NUM_TAXIS];
 
-
+Taxi spawn_taxi(Map m) {
+	Pos origin = get_random_pos(m);
+	return (Taxi) {
+		.origin = origin,
+		.destination = get_random_pos(m),
+		.taxi_pos = origin,
+		.state = TAXI_STATE_DRIVING,
+	};
+}
 
 void update_taxi(Taxi* T, Map m) {
 	for (int i = 0; i < MAX_NUM_TAXIS; i++) {

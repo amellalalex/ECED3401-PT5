@@ -30,12 +30,7 @@ int main(int argc, char *argv[]) {
 	// Init taxis
 	Taxi taxis[MAX_NUM_TAXIS];
 	for (int x = 0; x < MAX_NUM_TAXIS; x++) {
-		taxis[x] = (Taxi){
-			.state = TAXI_STATE_DRIVING,
-			.origin = get_random_pos(m),
-			.destination = get_random_pos(m),
-		};
-		taxis[x].taxi_pos = taxis[x].origin;
+		taxis[x] = spawn_taxi(m);
 	}
 
 	int driving_taxis = MAX_NUM_TAXIS;
