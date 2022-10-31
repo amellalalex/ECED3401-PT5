@@ -230,8 +230,8 @@ int get_char_heading(Pos src, Pos dest) {
 }
 
 // Returns the English version of the heading
-char* get_heading_msg(Map m, Pos src, Pos dest) {
-	switch (determine_heading(m, src, dest)) {
+char* get_heading_msg(int heading) {
+	switch (heading) {
 	case NORTH:
 		return "NORTH";
 		break;

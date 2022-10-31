@@ -40,13 +40,16 @@ int main(int argc, char *argv[]) {
 
 		printf("\n\n");
 		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
-			char* block_heading_msg = get_heading_msg(m, taxis[x].taxi_pos, taxis[x].destination);
-			char* char_heading_msg = get_heading_msg(m, taxis[x].taxi_pos, taxis[x].destination);
+			int heading = get_block_heading(taxis[x].taxi_pos, taxis[x].destination);
+			if (!heading) {
+				heading = get_char_heading(taxis[x].taxi_pos, taxis[x].destination);
+			}
+			char* heading_msg = get_heading_msg(heading);
 			printf(
-				"taxis[%d] => pos: {(%d, %d), (%d, %d)}, dest: {(%d, %d), (%d, %d)}, BLOCK_HEADING: %s, CHAR_HEADING: %s\n", x,
+				"taxis[%d] => pos: {(%d, %d), (%d, %d)}, dest: {(%d, %d), (%d, %d)}, HEADING: %s                 \n", x,
 				taxis[x].taxi_pos.x, taxis[x].taxi_pos.y, taxis[x].taxi_pos.cx, taxis[x].taxi_pos.cy,
 				taxis[x].destination.x, taxis[x].destination.y, taxis[x].destination.cx, taxis[x].destination.cy,
-				block_heading_msg, char_heading_msg
+				heading_msg
 			);
 		}
 
@@ -69,7 +72,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-		Sleep(500);
+		Sleep(250);
 	}
 
 	getchar();

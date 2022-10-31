@@ -48,7 +48,7 @@ int get_block_heading(Pos src, Pos dest);
 int get_char_heading(Pos src, Pos dest);
 
 // Returns the English version of the heading
-char* get_heading_msg(Map m, Pos src, Pos dest);
+char* get_heading_msg(int heading);
 
 // Returns scalar positions (absolute) from position
 //
