@@ -27,71 +27,45 @@ void navigate_taxi(Taxi* T, Map m) {
 	// Create scalar position
 	SPos scalar = get_scalar(m, T->taxi_pos);
 
-	// Align blocks first
-	if (T->origin.x < T->destination.x) {//if the taxi should go right
-		T->orientation = 2;
-		//T->taxi_pos = offset_cpos(T->taxi_pos, 1, 0);
-		scalar.x++;
-		
+	// Head towards block first
+	int block_heading = get_block_heading(T->taxi_pos, T->destination);
+	int char_heading = get_char_heading(T->taxi_pos, T->destination);
+
+	if (block_heading) {
+		switch (block_heading) {
+		case NORTH:
+			scalar.y--;
+			break;
+		case EAST:
+			scalar.x++;
+			break;
+		case SOUTH:
+			scalar.y++;
+			break;
+		case WEST:
+			scalar.x--;
+			break;
+		}
 	}
-	else if (T->taxi_pos.x > T->destination.x ) {//if the taxi should go left
-		T->orientation = 8;
-		//T->taxi_pos = offset_cpos(T->taxi_pos, -1, 0);
-		scalar.x--;
-		
+	else if (char_heading) {
+		switch (char_heading) {
+		case NORTH:
+			scalar.y--;
+			break;
+		case EAST:
+			scalar.x++;
+			break;
+		case SOUTH:
+			scalar.y++;
+			break;
+		case WEST:
+			scalar.x--;
+			break;
+		}
 	}
-	else if (T->origin.y < T->destination.y && T->taxi_pos.x == T->destination.x) {//if the taxi should go north
-		T->orientation = 1;
-		//T->taxi_pos = offset_cpos(T->taxi_pos, 0, 1);
-		scalar.y++;
-	}
-	else if (T->origin.y > T->destination.y  && T->taxi_pos.x == T->destination.x) {//if the taxi should go south
-		T->orientation = 4;
-		//T->taxi_pos = offset_cpos(T->taxi_pos, 0, -1);
-		scalar.y--;
-	}
-	else if (T->taxi_pos.cx == T->destination.cx && T->taxi_pos.x == T->destination.x && T->taxi_pos.cy == T->destination.cy && T->taxi_pos.y == T->destination.y) {
+	else {
 		T->state = TAXI_STATE_IDLE;
 	}
-	// Check for block alignment
-	else if (T->taxi_pos.x == T->destination.x && T->taxi_pos.y == T->destination.y) {
-		if (T->destination.cx != 0) {
-			// Move right
-			T->orientation = EAST;
-			//T->taxi_pos.cx++;
-			scalar.x++;
-		}
-		else if (T->destination.cy != 0) {
-			// Move down
-			T->orientation = SOUTH;
-			//T->taxi_pos.cy++;
-			scalar.y++;
-		}
-		else {
-			// We're done
-			T->state = TAXI_STATE_IDLE;
-		}
-	}
-
+	
 	T->taxi_pos = get_pos(m, scalar);
-
-	//if (T->taxi_pos.cx > 10) {
-	//	T->taxi_pos.cx = 0;
-	//	T->taxi_pos = offset_pos(T->taxi_pos, 1, 0, 1, 0);
-	//}
-
-	//if (T->taxi_pos.cx < 0) {
-	//	T->taxi_pos.cx = 10;
-	//	T->taxi_pos = offset_pos(T->taxi_pos, -1, 0, -1, 0);
-	//}
-
-	//if (T->taxi_pos.cy > 6) {
-	//	T->taxi_pos.cy = 0;
-	//	T->taxi_pos = offset_pos(T->taxi_pos, 0, 1, 0, 1);
-	//}
-
-	//if (T->taxi_pos.cy < 0) {//if the lower bound has been reached
-	//	T->taxi_pos.cy = 6;
-	//	T->taxi_pos = offset_pos(T->taxi_pos, 0, -1, 0, -1);
-	//}
 }

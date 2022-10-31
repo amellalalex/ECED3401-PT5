@@ -14,6 +14,7 @@
 
 // Standard C libraries
 #include <stdlib.h>
+#include <time.h>
 
 // Substandard C libraries
 #include <Windows.h>
@@ -39,6 +40,12 @@ Pos next_pos(Map m, Taxi t);
 
 // Determines heading with respect to positions
 int determine_heading(Map m, Pos src, Pos dest);
+
+// Return heading with respect to block position ONLY
+int get_block_heading(Pos src, Pos dest);
+
+// Return heading with respect to character position ONLY
+int get_char_heading(Pos src, Pos dest);
 
 // Returns the English version of the heading
 char* get_heading_msg(Map m, Pos src, Pos dest);

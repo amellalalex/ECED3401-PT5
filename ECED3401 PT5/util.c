@@ -191,6 +191,44 @@ int determine_heading(Map m, Pos src, Pos dest) {
 	return heading;
 }
 
+// Return heading with respect to block position ONLY
+int get_block_heading(Pos src, Pos dest) {
+	int heading = 0;
+	if (src.x < dest.x) {
+		heading = EAST;
+	}
+	else if (src.x > dest.x) {
+		heading = WEST;
+	}
+	else if (src.y < dest.y) {
+		heading = SOUTH;
+	}
+	else if (src.y > dest.y) {
+		heading = NORTH;
+	}
+
+	return heading;
+}
+
+// Return heading with respect to character position ONLY
+int get_char_heading(Pos src, Pos dest) {
+	int heading = 0;
+	if (src.cx < dest.cx) {
+		heading = EAST;
+	}
+	else if (src.cx > dest.cx) {
+		heading = WEST;
+	}
+	else if (src.cy < dest.cy) {
+		heading = SOUTH;
+	}
+	else if (src.cy > dest.cy) {
+		heading = NORTH;
+	}
+
+	return heading;
+}
+
 // Returns the English version of the heading
 char* get_heading_msg(Map m, Pos src, Pos dest) {
 	switch (determine_heading(m, src, dest)) {
