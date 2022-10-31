@@ -101,39 +101,44 @@ Pos get_random_pos(Map m) {
 }
 
 // Returns the next position of the taxi's path
+//
+// NOTE: This function is incomplete; taxis may get stuck
+//		 between blocks.
 Pos next_pos(Map m, Taxi t) {
-	SPos scalar_pos = get_scalar(m, t.taxi_pos);
-	SPos scalar_dest = get_scalar(m, t.destination);
-	SPos scalar_next = scalar_pos;
+	SPos scalar_next = get_scalar(m, t.taxi_pos);
 
 	// Determine heading
 	int heading = determine_heading(m, t.taxi_pos, t.destination);
 
-	// Check for opportunity to fork
-	int halign = t.taxi_pos.cx == 0;
-	int valign = t.taxi_pos.cy == 0;
-	if (halign && valign) {
-		// Fork
-	}
-	else {
-		// Move along current axis
+	// Check horizontal or vertical alignment
+	int valign = t.taxi_pos.cx == 0;
+	int halign = t.taxi_pos.cy == 0;
+	
+	if (heading & EAST) {
 		if (halign) {
-			if (heading & EAST) {
-				scalar_next.x++;
-			}
-			else if (heading & WEST) {
-				scalar_next.x--;
-			}
-		}
-		else if (valign) {
-			if (heading & NORTH) {
-				scalar_next.y--;
-			}
-			else if (heading & SOUTH) {
-				scalar_next.y++;
-			}
+			scalar_next.x++;
 		}
 	}
+	else if (heading & WEST) {
+		if (halign) {
+			scalar_next.x--;
+		}
+	}
+	else if (heading & NORTH) {
+		if (valign) {
+			scalar_next.y--;
+		}
+	}
+	else if (heading & SOUTH) {
+		if (valign) {
+			scalar_next.y++;
+		}
+	}
+
+	// Convert scalar back into grid pos
+	Pos next = get_pos(m, scalar_next);
+
+	return next;
 }
 
 // Returns scalar positions (absolute) from position
@@ -147,6 +152,16 @@ SPos get_scalar(Map m, Pos pos) {
 	};
 }
 
+// Returns grid position (relative) from scalar position.
+Pos get_pos(Map m, SPos s) {
+	return (Pos) {
+		.x = s.x / m.hchars_per_block,
+		.y = s.y / m.vchars_per_block,
+		.cx = s.x % m.hchars_per_block,
+		.cy = s.y % m.vchars_per_block,
+	};
+}
+
 // Determines heading with respect to positions
 //
 // NOTE: Don't forget that y increases going down (y-inverted)
@@ -154,8 +169,8 @@ SPos get_scalar(Map m, Pos pos) {
 //
 // Returns: Flag combination of N/E/S/W (OR'd) or 0 in case destination is reached
 int determine_heading(Map m, Pos src, Pos dest) {
-	Pos scalar_src = get_scalar(m, src);
-	Pos scalar_dest = get_scalar(m, dest);
+	SPos scalar_src = get_scalar(m, src);
+	SPos scalar_dest = get_scalar(m, dest);
 
 	// Determine heading
 	int heading = 0;
@@ -174,4 +189,36 @@ int determine_heading(Map m, Pos src, Pos dest) {
 	}
 
 	return heading;
+}
+
+// Returns the English version of the heading
+char* get_heading_msg(Map m, Pos src, Pos dest) {
+	switch (determine_heading(m, src, dest)) {
+	case NORTH:
+		return "NORTH";
+		break;
+	case EAST:
+		return "EAST";
+		break;
+	case SOUTH:
+		return "SOUTH";
+		break;
+	case WEST:
+		return "WEST";
+		break;
+	case NORTH | EAST:
+		return "NORTH-EAST";
+		break;
+	case NORTH | WEST:
+		return "NORTH-WEST";
+		break;
+	case SOUTH | EAST:
+		return "SOUTH-EAST";
+		break;
+	case SOUTH | WEST:
+		return "SOUTH-WEST";
+		break;
+	default:
+		return "UNKNOWN";
+	}
 }

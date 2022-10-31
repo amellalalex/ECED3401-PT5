@@ -80,4 +80,4 @@ typedef struct request {
 	int pass_num;
 	Pos origin;
 	Pos destination;
-};
+}  REQ;

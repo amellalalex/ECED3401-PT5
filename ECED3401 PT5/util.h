@@ -38,12 +38,18 @@ Pos get_random_pos(Map m);
 Pos next_pos(Map m, Taxi t);
 
 // Determines heading with respect to positions
-int determine_heading(Pos src, Pos dest);
+int determine_heading(Map m, Pos src, Pos dest);
+
+// Returns the English version of the heading
+char* get_heading_msg(Map m, Pos src, Pos dest);
 
 // Returns scalar positions (absolute) from position
 //
 // NOTE: Both the x/y and cx/cy pairs will contain the absolute position pairs.
 SPos get_scalar(Map m, Pos pos);
+
+// Returns grid position (relative) from scalar position.
+Pos get_pos(Map m, SPos s);
 
 ///////////////////////////
 //		Windows Util	 //
