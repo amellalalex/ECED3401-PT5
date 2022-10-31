@@ -20,10 +20,10 @@ enum taxi_state{
 } taxi_state;
 
 enum {
-	NORTH = (1 << 0),
-	EAST = (1 << 1),
-	SOUTH = (1 << 2),
-	WEST = (1 << 3),
+	NORTH = (1 << 0), // 1
+	EAST = (1 << 1), // 2
+	SOUTH = (1 << 2), // 4
+	WEST = (1 << 3), // 8
 };
 
 typedef struct pos {
