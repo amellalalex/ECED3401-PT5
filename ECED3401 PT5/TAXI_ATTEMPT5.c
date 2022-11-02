@@ -46,6 +46,7 @@ void navigate_taxi(Taxi* T, Map m) {
 			scalar.x--;
 			break;
 		}
+		T->orientation = block_heading;
 	}
 	else if (char_heading) {
 		switch (char_heading) {
@@ -62,6 +63,7 @@ void navigate_taxi(Taxi* T, Map m) {
 			scalar.x--;
 			break;
 		}
+		T->orientation = char_heading;
 	}
 	else {
 		T->state = TAXI_STATE_IDLE;
