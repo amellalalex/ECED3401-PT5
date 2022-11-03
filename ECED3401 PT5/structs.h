@@ -7,8 +7,12 @@
 
 #pragma once
 
-// Unstandard C libraries
-#include <Windows.h>
+// Substandard C libraries
+#if defined(_WIN32)
+	#include <Windows.h>
+#elif defined(__APPLE__)
+	#include "WindOSX.h"
+#endif
 
 #define MAX_NUM_TAXIS 4
 

@@ -63,6 +63,12 @@ void render_blockr(Map m, int flag) {
 }
 
 void render_map(Map m) {
+#if defined(__APPLE__)
+	printw("waddup");
+	refresh();
+#endif // __APPLE__
+
+#if defined(_WIN32)
 	// Sanity check
 	if (m.width < 1 || m.height < 1) {
 		// Render error message
@@ -81,21 +87,26 @@ void render_map(Map m) {
 	// Render last block row
 	render_blockr(m, BLOCKR_LAST);
 	printf("\n");
+
+#endif // _WIN32
 }
 
 // Replaces a character in the map with another character
 void render_replace(Map m, Pos pos, char c) {
+#if defined(_WIN32)
 	// Update terminal cursor location
 	move_cursor(m, offset_cpos(pos, 1, 0));
 
 	// Print backspace and desired newchar
 	printf("\b%c", c);
+#endif
 }
 
 // Renders a taxi on the map
 //
 // NOTE: Anchors the back of the taxi on the coordinate
 void render_taxi(Map m, Taxi t) {
+#if defined(_WIN32)
 	switch (t.orientation) {
 	case NORTH:
 		render_replace(m, offset_cpos(t.taxi_pos, 0, -1), CTAXI_W);
@@ -123,4 +134,5 @@ void render_taxi(Map m, Taxi t) {
 		render_replace(m, offset_cpos(t.taxi_pos, 1, 0), CTAXI_W);
 		break;
 	}
+#endif
 }

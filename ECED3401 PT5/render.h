@@ -16,7 +16,13 @@
 #include <stdio.h>
 
 // Substandard C libraries
-#include <Windows.h>
+#if defined(_WIN32)
+	#include <Windows.h>
+#elif defined(__APPLE__)
+	#include "WindOSX.h"
+#else
+	#error "Only designed for Windows or MacOSX"
+#endif
 
 // Map render chars
 #define CINTERS '+'

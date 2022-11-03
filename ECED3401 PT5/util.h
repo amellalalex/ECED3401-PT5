@@ -17,7 +17,9 @@
 #include <time.h>
 
 // Substandard C libraries
+#ifdef _WIN32
 #include <Windows.h>
+#endif
 
 //////////////
 // Pos Util //

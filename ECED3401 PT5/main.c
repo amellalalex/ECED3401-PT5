@@ -3,13 +3,22 @@
 #include "taxi.h"
 
 // Standard C libraries
+#include <curses.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 // Substandard C libraries
-#include <Windows.h>
+#if defined(_WIN32)
+	#include <Windows.h>
+#elif defined(__APPLE__)
+	#include "WindOSX.h"
+#endif
 
 int main(int argc, char *argv[]) {
+#ifdef __APPLE__
+	windosx_init();
+#endif
+
 	// Check argc 
 	if(argc != 3) {
 		printf("[!] Invalid number of args. Try ./a.out <width> <height>\n");
@@ -38,6 +47,10 @@ int main(int argc, char *argv[]) {
 		// Re-render map
 		render_map(m);
 
+
+		// Update taxi pos & render
+#ifdef DEBUG
+#ifdef _WIN32
 		printf("\n\n");
 		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
 			int heading = get_block_heading(taxis[x].taxi_pos, taxis[x].destination);
@@ -52,13 +65,11 @@ int main(int argc, char *argv[]) {
 				heading_msg
 			);
 		}
-
-		// Update taxi pos & render
-#ifdef DEBUG
 		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
 			taxis[x].taxi_pos = next_pos(m, taxis[x]);
 			render_taxi(m, taxis[x]);
 		}
+#endif
 #endif // DEBUG
 		update_taxi(taxis, m);
 		for (int x = 0; x < MAX_NUM_TAXIS; x++) {
